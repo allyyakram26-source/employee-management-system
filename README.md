@@ -1,16 +1,29 @@
-# React + Vite
+# Employee Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The project is split into two independently runnable applications:
 
-Currently, two official plugins are available:
+- `frontend/` contains the React and Vite application.
+- `backend/` contains the Express API and MongoDB models.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Run locally
 
-## React Compiler
+Use separate terminals from the repository root.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Start the frontend:
 
-## Expanding the ESLint configuration
+```powershell
+cd frontend
+npm install
+npm run dev
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Start the backend:
+
+```powershell
+cd backend
+npm install
+npm start
+```
+
+The backend listens on port `5000` by default and connects to MongoDB using
+`MONGO_URI` from `backend/.env` (or its configured default).
