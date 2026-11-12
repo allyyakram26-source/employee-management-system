@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { CheckCircle2, XCircle, Clock, Calendar as CalendarIcon } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { API_BASE_URL } from '../config.js';
 
 export default function Attendance() {
   const todayDate = new Date().toISOString().split('T')[0];
@@ -16,7 +17,7 @@ export default function Attendance() {
   const fetchAttendance = async (date) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/attendance?date=${date}`);
+      const response = await fetch(`${API_BASE_URL}/attendance?date=${date}`);
       const data = await response.json();
       if (response.ok) {
         setAttendanceList(data.data);
@@ -48,7 +49,7 @@ export default function Attendance() {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/attendance/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/attendance/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

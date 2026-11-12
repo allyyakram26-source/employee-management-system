@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Building2, Users, Shield, Briefcase } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { API_BASE_URL } from '../config.js';
 
 export default function Departments() {
   const [departments, setDepartments] = useState([]);
@@ -23,7 +24,7 @@ export default function Departments() {
   const fetchDepartments = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/departments');
+      const response = await fetch(`${API_BASE_URL}/departments`);
       const data = await response.json();
       if (response.ok) {
         setDepartments(data.data);

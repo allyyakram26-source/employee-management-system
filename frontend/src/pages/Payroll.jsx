@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { DollarSign, CheckCircle2, Clock, Plus, X } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { API_BASE_URL } from '../config.js';
 
 export default function Payroll() {
   const [payrollList, setPayrollList] = useState([]);
@@ -28,7 +29,7 @@ export default function Payroll() {
   const fetchPayroll = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/payroll');
+      const response = await fetch(`${API_BASE_URL}/payroll`);
       const data = await response.json();
       if (response.ok) {
         setPayrollList(data.data);
@@ -46,7 +47,7 @@ export default function Payroll() {
   // 2. Fetch Real Employees for Dropdown
   const fetchEmployees = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/employees');
+      const response = await fetch(`${API_BASE_URL}/employees`);
       const data = await response.json();
       if (response.ok) {
         setEmployeesList(data.data);
@@ -84,7 +85,7 @@ export default function Payroll() {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/payroll', {
+      const response = await fetch(`${API_BASE_URL}/payroll`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -108,7 +109,7 @@ export default function Payroll() {
   const togglePaymentStatus = async (id, currentStatus) => {
     const nextStatus = currentStatus === 'Paid' ? 'Pending' : 'Paid';
     try {
-      const response = await fetch(`http://localhost:5000/api/payroll/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/payroll/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: nextStatus }),

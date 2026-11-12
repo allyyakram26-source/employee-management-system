@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Search, Plus, Trash2, Edit, X } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { API_BASE_URL } from '../config.js';
 
 export default function Employees() {
   const [employees, setEmployees] = useState([]);
@@ -24,7 +25,7 @@ export default function Employees() {
 
   const fetchEmployees = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/employees');
+      const response = await fetch(`${API_BASE_URL}/employees`);
       const data = await response.json();
       if (response.ok) {
         setEmployees(data.data);
@@ -62,8 +63,8 @@ export default function Employees() {
     e.preventDefault();
     try {
       const url = editingId 
-        ? `http://localhost:5000/api/employees/${editingId}` 
-        : 'http://localhost:5000/api/employees';
+        ? `${API_BASE_URL}/employees/${editingId}`
+        : `${API_BASE_URL}/employees`;
       
       const method = editingId ? 'PUT' : 'POST';
 
@@ -100,7 +101,7 @@ export default function Employees() {
   // Delete Employee Function
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/employees/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/employees/${id}`, {
         method: 'DELETE',
       });
       

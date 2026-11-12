@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Users, UserCheck, Building2, TrendingUp, DollarSign } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { API_BASE_URL } from '../config.js';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -19,7 +20,7 @@ export default function Dashboard() {
   const fetchDashboardStats = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/dashboard/stats');
+      const response = await fetch(`${API_BASE_URL}/dashboard/stats`);
       const data = await response.json();
       if (response.ok) {
         setStats(data.data);
