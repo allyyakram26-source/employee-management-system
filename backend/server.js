@@ -22,7 +22,9 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/EMS_Databa
 mongoose.connect(MONGO_URI)
   .then(() => console.log('✅ Connected to MongoDB successfully!'))
   .catch((err) => console.error('❌ MongoDB connection failed:', err));
-
+app.get('/', (req, res) => {
+  res.send('EMS Backend is running successfully! 🚀');
+});
 // Routes Mapping
 app.use('/api/auth', authRoutes);
 app.use('/api/employees', employeeRoutes);
