@@ -13,10 +13,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-// app.use(cors());
+const frontendOrigin = (
+  process.env.FRONTEND_URL || 'https://frontend-tau-henna-41.vercel.app'
+).replace(/\/+$/, '');
+
 app.use(
   cors({
-    origin: "https://frontend-tau-henna-41.vercel.app/",
+    origin: [frontendOrigin, 'http://localhost:5173'],
     credentials: true,
   }),
 );
@@ -40,5 +43,5 @@ app.use('/api/payroll', payrollRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 // Start Server
 app.listen(PORT, () => {
-  console.log(`🚀 Backend Server running on port ${PORT}`);
+  console.log(`Backend Server running on port ${PORT}`);
 });
