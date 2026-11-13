@@ -13,9 +13,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-const frontendOrigin = (
-  process.env.FRONTEND_URL || 'https://frontend-tau-henna-41.vercel.app'
-).replace(/\/+$/, '');
+const frontendOrigin = new URL(
+  process.env.FRONTEND_URL || 'https://frontend-tau-henna-41.vercel.app',
+).origin;
 
 app.use(
   cors({
@@ -26,7 +26,7 @@ app.use(
 app.use(express.json());
 
 // MongoDB Connection
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/EMS';
+const MONGO_URI = process.env.MONGO_URI;
 
 mongoose.connect(MONGO_URI)
   .then(() => console.log('✅ Connected to MongoDB successfully!'))
